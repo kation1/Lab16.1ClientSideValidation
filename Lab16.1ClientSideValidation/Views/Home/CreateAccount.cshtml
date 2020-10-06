@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CreateAccount</title>
+
+    <script>
+
+        function submitForm() {
+            let first = document.getElementById('FirstNameElem');
+            let last = document.getElementById('LastNameElem');
+            let pass = document.getElementById('PasswordElem');
+            let email = document.getElementById('EmailElem');
+            var regemail = /^([A-Za-z0-9]{5,20})+@@([A-Za-z0-9])+.([A-Za-z]{2,4})$/;
+            var regpass = /^((?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@@#$%^&*])).{6,20}$/;
+
+            if (first.value.length <= 2) {
+                let firstnamewarning = document.getElementById('firstnamewarning');
+                firstnamewarning.innerHTML = 'Not Long enough';
+                return false;
+            }
+
+            if (last.value.length <= 2) {
+                let lastnamewarning = document.getElementById('lastnamewarning');
+                lastnamewarning.innerHTML = 'Not Long enough';
+                return false;
+            }
+            if (regemail.test(email.value)==false) {
+                let emailwarning = document.getElementById('emailwarning');
+                emailwarning.innerHTML = "Not a valid email";
+                return false;
+            }
+            if (regpass.test(pass.value) == false) {
+                let passwordwarning = document.getElementById('passwordwarning');
+                passwordwarning.innerHTML = "Not a valid password";
+                return false;
+            }
+
+
+
+
+        }
+    </script>
+</head>
+<body>
+
+    <form action="/HOME/ViewAccount/" method="POST" onsubmit="return submitForm()">
+
+        First Name:<input type="text" name="Firstname" id="FirstNameElem" />
+        <div id='firstnamewarning'><p></p></div>
+        Last Name: <input type="text" name="LastName" id="LastNameElem" />
+        <div id='lastnamewarning'><p></p></div>
+        Password: <input type="text" name="Password" id="PasswordElem" />
+        <div id='passwordwarning'><p></p></div>
+        Email: <input type="text" name="Email" id="EmailElem" />
+        <div id='emailwarning'><p></p></div>
+        <input type="submit" />
+
+    </form>
+
+</body>
+</html>
